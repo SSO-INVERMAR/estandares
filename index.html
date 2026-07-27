@@ -3,439 +3,700 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro de Capacitaciones</title>
+<title>Registro de Capacitación | Invermar</title>
 <style>
-  * { box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #eef1f5;
-    display: flex;
-    justify-content: center;
-    padding: 24px 16px;
-    margin: 0;
+  :root{
+    --azul:#00205B;
+    --azul-claro:#1a3d7c;
+    --azul-suave:#eef1f8;
+    --gris-borde:#d4d9e3;
+    --gris-texto:#3a3f4b;
+    --verde-ok:#1e8e3e;
+    --rojo-error:#c5221f;
+    --radio:10px;
   }
-  .card {
-    background: #fff;
-    padding: 32px;
-    border-radius: 12px;
-    box-shadow: 0 2px 14px rgba(0,0,0,0.08);
-    width: 100%;
-    max-width: 640px;
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Segoe UI',Arial,Helvetica,sans-serif;
+    background:linear-gradient(180deg,var(--azul-suave) 0%, #ffffff 220px);
+    color:var(--gris-texto);
+    padding-bottom:60px;
   }
-  h1 { font-size: 21px; margin-bottom: 4px; color: #1a1a1a; }
-  p.subtitle { color: #666; font-size: 14px; margin-bottom: 24px; }
-  fieldset {
-    border: 1px solid #e3e5e9;
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 20px;
+  header{
+    background:#ffffff;
+    padding:22px 16px 18px;
+    text-align:center;
+    border-bottom:4px solid var(--azul);
   }
-  legend { font-weight: 700; font-size: 13px; color: #4a7dfc; padding: 0 6px; }
-  label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 6px; margin-top: 14px; }
-  label:first-of-type { margin-top: 0; }
-  input, select, textarea {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fff;
+  header img{
+    max-width:260px;
+    width:60%;
+    height:auto;
   }
-  input:focus, select:focus, textarea:focus { outline: none; border-color: #4a7dfc; }
-  input[readonly] { background: #f4f5f7; color: #444; }
-  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .participante {
-    border: 1px dashed #c9cdd4;
-    border-radius: 8px;
-    padding: 12px;
-    margin-top: 12px;
-    position: relative;
+  header h1{
+    font-size:1.25rem;
+    color:var(--azul);
+    margin:14px 0 4px;
+    font-weight:700;
+    letter-spacing:.2px;
   }
-  .participante .quitar {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #fde8e8;
-    color: #c0392b;
-    border: none;
-    border-radius: 6px;
-    font-size: 12px;
-    padding: 4px 8px;
-    cursor: pointer;
-    width: auto;
+  header p{
+    margin:0;
+    color:#6b7280;
+    font-size:.9rem;
   }
-  .participante .quitar:hover { background: #f8caca; }
-  #agregarParticipante {
-    background: #eef2ff;
-    color: #4a7dfc;
-    border: 1px dashed #4a7dfc;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
+  .contenedor{
+    max-width:640px;
+    margin:20px auto;
+    padding:0 16px;
   }
-  #agregarParticipante:hover { background: #e3e9ff; }
-  button[type="submit"] {
-    width: 100%;
-    margin-top: 8px;
-    padding: 13px;
-    background: #4a7dfc;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
+  .tarjeta{
+    background:#fff;
+    border:1px solid var(--gris-borde);
+    border-radius:var(--radio);
+    padding:20px 18px;
+    margin-bottom:18px;
+    box-shadow:0 1px 3px rgba(0,32,91,0.06);
   }
-  button[type="submit"]:hover { background: #3a6ae8; }
-  button[type="submit"]:disabled { background: #aaa; cursor: not-allowed; }
-  .hint { font-size: 12px; color: #888; margin-top: 4px; }
-  .hint.error-text { color: #c0392b; }
-  #status { margin-top: 16px; font-size: 14px; text-align: center; font-weight: 600; }
-  #status.success { color: #1a9c4b; }
-  #status.error { color: #d32f2f; }
+  .tarjeta h2{
+    font-size:1rem;
+    color:var(--azul);
+    margin:0 0 16px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--azul-suave);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .tarjeta h2 .num{
+    background:var(--azul);
+    color:#fff;
+    width:24px;height:24px;
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;justify-content:center;
+    font-size:.78rem;
+    flex:none;
+  }
+  label{
+    display:block;
+    font-size:.85rem;
+    font-weight:600;
+    color:var(--gris-texto);
+    margin:14px 0 6px;
+  }
+  label.req::after{
+    content:" *";
+    color:var(--rojo-error);
+  }
+  input[type=text],
+  input[type=date],
+  input[type=time],
+  input[type=number],
+  select{
+    width:100%;
+    padding:11px 12px;
+    border:1.5px solid var(--gris-borde);
+    border-radius:8px;
+    font-size:.95rem;
+    background:#fff;
+    color:var(--gris-texto);
+    font-family:inherit;
+  }
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--azul);
+    box-shadow:0 0 0 3px rgba(0,32,91,0.12);
+  }
+  input[readonly]{
+    background:#f3f5f9;
+    color:#555;
+  }
+  .fila2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  .fila3{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:12px;
+  }
+  small.ayuda{
+    display:block;
+    color:#8a8f99;
+    font-size:.76rem;
+    margin-top:4px;
+  }
+  .estado-busqueda{
+    font-size:.78rem;
+    margin-top:5px;
+    min-height:16px;
+  }
+  .estado-busqueda.ok{color:var(--verde-ok);}
+  .estado-busqueda.error{color:var(--rojo-error);}
+  .estado-busqueda.buscando{color:#8a8f99;}
+
+  .participante{
+    border:1.5px dashed var(--gris-borde);
+    border-radius:9px;
+    padding:14px 14px 6px;
+    margin-top:14px;
+    position:relative;
+    background:#fbfcfe;
+  }
+  .participante .etiqueta-part{
+    position:absolute;
+    top:-11px;
+    left:12px;
+    background:var(--azul);
+    color:#fff;
+    font-size:.72rem;
+    font-weight:700;
+    padding:2px 10px;
+    border-radius:20px;
+  }
+  .btn-quitar{
+    position:absolute;
+    top:-11px;
+    right:10px;
+    background:#fff;
+    border:1.5px solid var(--rojo-error);
+    color:var(--rojo-error);
+    font-size:.72rem;
+    font-weight:700;
+    padding:2px 10px;
+    border-radius:20px;
+    cursor:pointer;
+  }
+  .btn-agregar{
+    width:100%;
+    margin-top:16px;
+    padding:12px;
+    background:#fff;
+    border:2px dashed var(--azul);
+    color:var(--azul);
+    font-weight:700;
+    font-size:.9rem;
+    border-radius:9px;
+    cursor:pointer;
+  }
+  .btn-agregar:hover{background:var(--azul-suave);}
+
+  .zona-foto{
+    border:2px dashed var(--gris-borde);
+    border-radius:10px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    background:#fbfcfe;
+  }
+  .zona-foto:hover{border-color:var(--azul);}
+  .zona-foto svg{margin-bottom:8px;}
+  .zona-foto p{margin:0;font-size:.88rem;color:#6b7280;}
+  .previa-foto{
+    margin-top:14px;
+    text-align:center;
+  }
+  .previa-foto img{
+    max-width:100%;
+    max-height:280px;
+    border-radius:8px;
+    border:1.5px solid var(--gris-borde);
+  }
+  .previa-foto button{
+    display:block;
+    margin:10px auto 0;
+    background:none;
+    border:none;
+    color:var(--rojo-error);
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+  }
+  #inputFoto, #inputCamara{display:none;}
+  .botones-foto{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+  }
+  .botones-foto button{
+    flex:1;
+    padding:10px;
+    border-radius:8px;
+    border:1.5px solid var(--azul);
+    background:#fff;
+    color:var(--azul);
+    font-weight:600;
+    font-size:.85rem;
+    cursor:pointer;
+  }
+  .botones-foto button:hover{background:var(--azul-suave);}
+
+  .btn-enviar{
+    width:100%;
+    padding:16px;
+    background:var(--azul);
+    color:#fff;
+    border:none;
+    border-radius:10px;
+    font-size:1.02rem;
+    font-weight:700;
+    cursor:pointer;
+    letter-spacing:.3px;
+  }
+  .btn-enviar:hover{background:var(--azul-claro);}
+  .btn-enviar:disabled{background:#9aa5c0;cursor:not-allowed;}
+
+  .mensaje{
+    display:none;
+    padding:14px 16px;
+    border-radius:9px;
+    font-size:.9rem;
+    margin-bottom:16px;
+    font-weight:600;
+    text-align:center;
+  }
+  .mensaje.exito{background:#e6f4ea;color:var(--verde-ok);border:1px solid #b7e1c1;}
+  .mensaje.error{background:#fce8e6;color:var(--rojo-error);border:1px solid #f6c6c3;}
+  .mensaje.mostrar{display:block;}
+
+  footer{
+    text-align:center;
+    color:#9aa0ac;
+    font-size:.75rem;
+    margin-top:20px;
+    padding:0 16px;
+  }
+
+  @media (max-width:480px){
+    .fila2, .fila3{grid-template-columns:1fr;}
+    header h1{font-size:1.08rem;}
+  }
 </style>
 </head>
 <body>
 
-<div class="card">
-  <img src="data:image/png;base64,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" alt="Invermar" style="display:block;max-width:220px;height:auto;margin:0 auto 20px auto;">
-  <h1>Registro de Capacitaciones</h1>
-  <p class="subtitle">Completa los datos de la actividad. El nombre y cargo se completan automáticamente al ingresar el RUT.</p>
+<header>
+  <img src="data:image/png;base64,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" alt="Invermar">
+  <h1>Registro de Capacitación</h1>
+  <p>Estándares Preventivos · Centros de Cultivo</p>
+</header>
 
-  <form id="miFormulario">
+<div class="contenedor">
 
-    <fieldset>
-      <legend>Datos de la actividad</legend>
+  <div id="mensajeExito" class="mensaje exito"></div>
+  <div id="mensajeError" class="mensaje error"></div>
 
-      <label for="capacitacion">Nombre de la capacitación</label>
-      <select id="capacitacion" name="capacitacion" required>
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="Estándar Preventivo N°1 Ensilaje">Estándar Preventivo N°1 Ensilaje</option>
-        <option value="Estándar Preventivo N°2 Uso de Hidrolavadora">Estándar Preventivo N°2 Uso de Hidrolavadora</option>
-        <option value="Estándar Preventivo N°3 Carga de peces">Estándar Preventivo N°3 Carga de peces</option>
-        <option value="Estándar Preventivo N°4 Manejo Manual de Carga">Estándar Preventivo N°4 Manejo Manual de Carga</option>
-        <option value="Estándar Preventivo N°5 Brazo Hidraulico">Estándar Preventivo N°5 Brazo Hidraulico</option>
-        <option value="Estándar Preventivo N°6 descarga de alimento Agua Dulce">Estándar Preventivo N°6 descarga de alimento Agua Dulce</option>
-        <option value="Estándar Preventivo N°7 Uso de Winche">Estándar Preventivo N°7 Uso de Winche</option>
-        <option value="Estándar Preventivo N°8 Trabajo en Tablero electrico">Estándar Preventivo N°8 Trabajo en Tablero electrico</option>
-        <option value="Estándar Preventivo N°9 Carga Grua Horquilla electrica">Estándar Preventivo N°9 Carga Grua Horquilla electrica</option>
-        <option value="Estándar Preventivo N°10 Atraque de Embarcación">Estándar Preventivo N°10 Atraque de Embarcación</option>
-        <option value="Estándar Preventivo N°11 Uso de Bote">Estándar Preventivo N°11 Uso de Bote</option>
-        <option value="Estándar Preventivo N°12 Uso y recarga de cilindo GLP">Estándar Preventivo N°12 Uso y recarga de cilindo GLP</option>
-        <option value="Estándar Preventivo N°13 Trabajo en altura">Estándar Preventivo N°13 Trabajo en altura</option>
-        <option value="Estándar Preventivo N°14 Izaje y carga suspendida">Estándar Preventivo N°14 Izaje y carga suspendida</option>
-        <option value="Estándar Preventivo N°15 - Baño de peces peroxido de hidrogeno">Estándar Preventivo N°15 - Baño de peces peroxido de hidrogeno</option>
-        <option value="Estándar Preventivo N°16- Uso de mascara Parat">Estándar Preventivo N°16- Uso de mascara Parat</option>
-        <option value="Estándar Preventivo N°17 - Trabajo con sustancias Peligrosas">Estándar Preventivo N°17 - Trabajo con sustancias Peligrosas</option>
-        <option value="Estándar Preventivo N°18 - Uso de Winche electrico">Estándar Preventivo N°18 - Uso de Winche electrico</option>
-        <option value="Estándar Preventivo N°19 - Uso de Mascara Parat">Estándar Preventivo N°19 - Uso de Mascara Parat</option>
-        <option value="Estándar Preventivo N°20 - Espacios Confinados">Estándar Preventivo N°20 - Espacios Confinados</option>
-        <option value="Estándar Preventivo N°21 - Descarga de alimento Centros de cultivo">Estándar Preventivo N°21 - Descarga de alimento Centros de cultivo</option>
-        <option value="Estándar Preventivo N°22 - Medidor de Acido Sulfidhrico">Estándar Preventivo N°22 - Medidor de Acido Sulfidhrico</option>
-        <option value="Estándar Preventivo N°23 - Desplazamiento seguro por lugares de trabajo">Estándar Preventivo N°23 - Desplazamiento seguro por lugares de trabajo</option>
-        <option value="Estándar Preventivo N°24 - Uso de Equipo Saver">Estándar Preventivo N°24 - Uso de Equipo Saver</option>
-        <option value="Estándar Preventivo N°25- Uso sistema de Achique">Estándar Preventivo N°25- Uso sistema de Achique</option>
-        <option value="Estándar Preventivo N°26- Cambio de Malla">Estándar Preventivo N°26- Cambio de Malla</option>
-        <option value="Estándar Preventivo N°27 -Uso Transpaleta Manual">Estándar Preventivo N°27 -Uso Transpaleta Manual</option>
-        <option value="Estándar Preventivo N°28 Maniobras de Cosecha en centros de cultivos">Estándar Preventivo N°28 Maniobras de Cosecha en centros de cultivos</option>
-        <option value="Estándar Preventivo N°29 extincion incendio motobomba">Estándar Preventivo N°29 extincion incendio motobomba</option>
-        <option value="Estándar Preventivo N°30 Transito por pasillos de estanques con agua">Estándar Preventivo N°30 Transito por pasillos de estanques con agua</option>
-        <option value="Estándar Preventivo N°31 Uso mascara rostro completo y filtros">Estándar Preventivo N°31 Uso mascara rostro completo y filtros</option>
-        <option value="Estándar Preventivo N°32 Inyección de peces">Estándar Preventivo N°32 Inyección de peces</option>
-        <option value="Estándar Preventivo N°33 Operación planta lodos">Estándar Preventivo N°33 Operación planta lodos</option>
-        <option value="Estándar Preventivo N°34 Uso trajes de inmersion">Estándar Preventivo N°34 Uso trajes de inmersion</option>
-        <option value="Estándar Preventivo N°35 Uso balsa salvavidas">Estándar Preventivo N°35 Uso balsa salvavidas</option>
-        <option value="Estándar Preventivo N°36 Uso de elementos cortopunzantes">Estándar Preventivo N°36 Uso de elementos cortopunzantes</option>
-        <option value="Estándar Preventivo N°37 Limpieza de maquinas de casino">Estándar Preventivo N°37 Limpieza de maquinas de casino</option>
-        <option value="Estándar Preventivo N°38 Conducción Segura">Estándar Preventivo N°38 Conducción Segura</option>
-        <option value="Estándar Preventivo N°39 Trabajos Criticos">Estándar Preventivo N°39 Trabajos Criticos</option>
-        <option value="Estándar Preventivo N°40 Manipulacion de liquidos calientes">Estándar Preventivo N°40 Manipulacion de liquidos calientes</option>
-        <option value="Estándar Preventivo N°41 Uso de plataformas elevadoras">Estándar Preventivo N°41 Uso de plataformas elevadoras</option>
-        <option value="Estándar Preventivo N°42 Trabajos en andamios">Estándar Preventivo N°42 Trabajos en andamios</option>
-        <option value="Estándar Preventivo N°43 Excavaciones">Estándar Preventivo N°43 Excavaciones</option>
-        <option value="Estándar Preventivo N°44 Herramientas y extensiones eléctricas">Estándar Preventivo N°44 Herramientas y extensiones eléctricas</option>
-        <option value="Estándar Preventivo N°45 Izaje y cargas suspendidas">Estándar Preventivo N°45 Izaje y cargas suspendidas</option>
-        <option value="Estándar Preventivo N°46 Trabajo en altura">Estándar Preventivo N°46 Trabajo en altura</option>
-        <option value="Estándar Preventivo N°47 Trabajo en caliente">Estándar Preventivo N°47 Trabajo en caliente</option>
-        <option value="Estándar Preventivo N°48 Trabajo en fibra de vidrio">Estándar Preventivo N°48 Trabajo en fibra de vidrio</option>
-        <option value="Estándar Preventivo N°49 Zafarrancho de Incendio">Estándar Preventivo N°49 Zafarrancho de Incendio</option>
-      </select>
+  <form id="formCapacitacion">
 
-      <label for="centro">Centro</label>
-      <select id="centro" name="centro" required>
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="Centro Auchac">Centro Auchac</option>
-        <option value="Centro Chalihue">Centro Chalihue</option>
-        <option value="Centro Chulin">Centro Chulin</option>
-        <option value="Centro Ester">Centro Ester</option>
-        <option value="Centro Mapue">Centro Mapue</option>
-        <option value="Centro Nayahue">Centro Nayahue</option>
-        <option value="Centro Puqueldon">Centro Puqueldon</option>
-        <option value="Centro Tepun">Centro Tepun</option>
-        <option value="Centro Traiguen 1">Centro Traiguen 1</option>
-        <option value="Centro Traiguen 2">Centro Traiguen 2</option>
-        <option value="Centro Yatac">Centro Yatac</option>
-        <option value="Centro Telqui">Centro Telqui</option>
-      </select>
+    <!-- 1. Datos de la actividad -->
+    <div class="tarjeta">
+      <h2><span class="num">1</span> Datos de la actividad</h2>
 
-      <div class="row2">
+      <label class="req" for="capacitacion">Capacitación</label>
+      <select id="capacitacion" required></select>
+
+      <label class="req" for="centro">Centro</label>
+      <select id="centro" required></select>
+
+      <div class="fila3">
         <div>
-          <label for="fecha">Fecha</label>
-          <input type="date" id="fecha" name="fecha" required>
+          <label class="req" for="fecha">Fecha</label>
+          <input type="date" id="fecha" required>
         </div>
         <div>
-          <label for="hora">Hora</label>
-          <input type="time" id="hora" name="hora" required>
+          <label class="req" for="hora">Hora</label>
+          <input type="time" id="hora" required>
+        </div>
+        <div>
+          <label class="req" for="duracion">Duración (min)</label>
+          <input type="number" id="duracion" min="1" step="1" placeholder="Ej: 30" required>
         </div>
       </div>
+    </div>
 
-      <label for="duracion">Duración de la actividad (minutos)</label>
-      <input type="number" id="duracion" name="duracion" placeholder="90" min="1" step="1" required>
-      <div class="hint">Ingresa la duración total en minutos, ej: 90</div>
-    </fieldset>
+    <!-- 2. Relator -->
+    <div class="tarjeta">
+      <h2><span class="num">2</span> Relator</h2>
 
-    <fieldset>
-      <legend>Relator</legend>
+      <label class="req" for="rutRelator">RUT Relator</label>
+      <input type="text" id="rutRelator" placeholder="12345678-9" required>
+      <div id="estadoRelator" class="estado-busqueda"></div>
 
-      <label for="rutRelator">Rut Relator</label>
-      <input type="text" id="rutRelator" name="rutRelator" placeholder="12345678-9" required>
-      <div class="hint" id="hintRelator"></div>
+      <div class="fila2">
+        <div>
+          <label>Nombre Relator</label>
+          <input type="text" id="nombreRelator" readonly placeholder="Se completa automáticamente">
+        </div>
+        <div>
+          <label>Cargo Relator</label>
+          <input type="text" id="cargoRelator" readonly placeholder="Se completa automáticamente">
+        </div>
+      </div>
+    </div>
 
-      <label for="nombreRelator">Nombre Relator</label>
-      <input type="text" id="nombreRelator" name="nombreRelator" readonly required>
-
-      <label for="cargoRelator">Cargo</label>
-      <input type="text" id="cargoRelator" name="cargoRelator" readonly required>
-    </fieldset>
-
-    <fieldset>
-      <legend>Participantes</legend>
-      <p class="hint" style="margin-top:0;">Debe registrar al menos un participante.</p>
+    <!-- 3. Participantes -->
+    <div class="tarjeta">
+      <h2><span class="num">3</span> Participantes</h2>
       <div id="listaParticipantes"></div>
-      <button type="button" id="agregarParticipante">+ Agregar participante</button>
-    </fieldset>
+      <button type="button" class="btn-agregar" id="btnAgregarParticipante">+ Agregar otro participante</button>
+    </div>
 
-    <button type="submit" id="botonEnviar">Registrar</button>
-    <div id="status"></div>
+    <!-- 4. Evidencia -->
+    <div class="tarjeta">
+      <h2><span class="num">4</span> Evidencia fotográfica</h2>
+
+      <div class="zona-foto" id="zonaFoto">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00205B" stroke-width="1.6"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <p>Toca para tomar una foto o subir una imagen</p>
+      </div>
+
+      <div class="botones-foto">
+        <button type="button" id="btnCamara">📷 Tomar foto</button>
+        <button type="button" id="btnGaleria">🖼️ Subir imagen</button>
+      </div>
+
+      <input type="file" id="inputCamara" accept="image/*" capture="environment">
+      <input type="file" id="inputFoto" accept="image/*">
+
+      <div class="previa-foto" id="previaFoto" style="display:none;">
+        <img id="imgPrevia" src="" alt="Evidencia">
+        <button type="button" id="btnQuitarFoto">Quitar foto</button>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-enviar" id="btnEnviar">Enviar registro</button>
   </form>
+
+  <footer>Invermar S.A. — Formulario conectado a Google Drive</footer>
 </div>
 
 <script>
-  // ================== CONFIGURACION ==================
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxwTfhdAB1EwA54RYy4in4SVZ2dqF-WBdTLoPqVWE3mmIA23hS8ddhycKSEV6WSCduz/exec";
+/* =========================================================
+   CONFIGURACIÓN — reemplazar con la URL de tu Web App de
+   Google Apps Script (ver "Instrucciones_Configuracion.md")
+   ========================================================= */
+const URL_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyUMzk_hNsrn8GbUxJM676a7RR9jBKullzvX2CQlQcQgJENZJ3mENWj3kb2xZxF5XI/exec";
 
-  // Base de empleados: Rut, Nombre Completo, Cargo
-  const EMPLEADOS = [{"rut": "11432872-3", "nombre": "Haro Barría Jaime", "cargo": "Capataz"}, {"rut": "12391417-1", "nombre": "Colivoro Chiguay Marco Aurelio", "cargo": "Operario"}, {"rut": "9081109-6", "nombre": "Ruiz Díaz Domingo Iludino", "cargo": "Operario"}, {"rut": "14526007-8", "nombre": "Ruiz Díaz Diego Patricio", "cargo": "Operario"}, {"rut": "10361129-6", "nombre": "Arriagada Jara Raúl Eduardo", "cargo": "Asistente de Centro"}, {"rut": "13170024-5", "nombre": "Mansilla Mansilla Nelson Humberto", "cargo": "Operario"}, {"rut": "10263603-1", "nombre": "Vivar Torres Eliecer Hernán", "cargo": "Operario"}, {"rut": "8989663-0", "nombre": "Mella Huichacan Juana Rosa", "cargo": "Cocinero"}, {"rut": "12674299-1", "nombre": "Ahumada Perez David Octavio", "cargo": "Asistente de Centro"}, {"rut": "12203542-5", "nombre": "Ruiz Díaz Mario José", "cargo": "Operario"}, {"rut": "11545195-2", "nombre": "Mansilla Vera Claudio Alejandro", "cargo": "Operario"}, {"rut": "13001937-4", "nombre": "Calbuyahue Guichaquelen Francisco Javier", "cargo": "Operario"}, {"rut": "8503740-4", "nombre": "Barría Barría Daniel Orlando", "cargo": "Operario"}, {"rut": "6954089-9", "nombre": "Chacón Barría Juan Elías", "cargo": "Operario"}, {"rut": "10486114-8", "nombre": "Muñoz Torres Manuel Antonio", "cargo": "Operario"}, {"rut": "8558771-4", "nombre": "Andrade Saldivia Arnoldo Eduardo", "cargo": "Operario"}, {"rut": "11432911-8", "nombre": "Vargas Miranda Dagoberto", "cargo": "Operario"}, {"rut": "8103761-2", "nombre": "Miranda Bahamonde Ramon Hector", "cargo": "Asistente de Fondeos y Estructuras Flotantes"}, {"rut": "12699968-2", "nombre": "Ibañez Llancao Pedro Ivan", "cargo": "Asistente de Centro"}, {"rut": "17719069-1", "nombre": "Diaz Cumicheo Juan Eduardo", "cargo": "Operario"}, {"rut": "13570558-6", "nombre": "Pichoante Osses Juan Andres", "cargo": "Jefe de Centro"}, {"rut": "13210559-6", "nombre": "Legue Guanel Roberto Alejandro", "cargo": "Operario"}, {"rut": "15814276-7", "nombre": "Legue Guanel Miguel Antonio", "cargo": "Operario"}, {"rut": "13594173-5", "nombre": "Torres Curguan Rosa Eliana", "cargo": "Cocinero"}, {"rut": "12342885-4", "nombre": "Bravo Navarro Luis Eduardo", "cargo": "Operario"}, {"rut": "11718334-3", "nombre": "Cardenas Mansilla Silvio Oreste", "cargo": "Operario"}, {"rut": "14088493-6", "nombre": "Silva Vargas Miguel Antonio", "cargo": "Operario"}, {"rut": "18346085-4", "nombre": "Subiabre Ilnao Luis Ernesto", "cargo": "Operario"}, {"rut": "16460497-7", "nombre": "Mercado Mansilla Pablo Enrique", "cargo": "Supervisor de Mantención"}, {"rut": "9821728-2", "nombre": "Oyarzún Saldivia Alex Patricio", "cargo": "Jefe de Centro"}, {"rut": "15765441-1", "nombre": "Garcés Brondi Carlos Roberto", "cargo": "Jefe de Centro"}, {"rut": "8614234-1", "nombre": "Nancul Taruman Fredys Aureliano", "cargo": "Cocinero Pontón"}, {"rut": "14087988-6", "nombre": "Tenorio Gómez Yessica Eduvina", "cargo": "Cocinero"}, {"rut": "8482969-2", "nombre": "Arce Vera Maria Hilda", "cargo": "Cocinero Pontón"}, {"rut": "18281588-8", "nombre": "Panicheo Gallegos Carlos Daniel", "cargo": "Operario"}, {"rut": "11518548-9", "nombre": "Pérez Chacana Carlos Alberto", "cargo": "Jefe de Operaciones Marítimas"}, {"rut": "13001870-k", "nombre": "Torres Curguan Juan Gabriel", "cargo": "Operario"}, {"rut": "15883921-0", "nombre": "Rosas Jaramillo Claudio Marcelo", "cargo": "Jefe de Centro"}, {"rut": "15645133-9", "nombre": "Chaura Contreras Cristian Hernán", "cargo": "Asistente de Centro"}, {"rut": "16938689-7", "nombre": "Henriquez Navarrete Sebastian Andres", "cargo": "Asistente de Centro"}, {"rut": "17275634-4", "nombre": "Vivar Bustamante Esteban Alejandro", "cargo": "Asistente de Centro"}, {"rut": "17648758-5", "nombre": "Martinez Naipan Jonathan Eduardo", "cargo": "Jefe de Centro"}, {"rut": "10431467-8", "nombre": "Mansilla Vargas José Arcadio", "cargo": "Operario"}, {"rut": "11845502-9", "nombre": "Troncoso Gomez Claudio Marcelo", "cargo": "Asistente de Centro"}, {"rut": "16151665-1", "nombre": "Cabero Andrade Ulises Ariel", "cargo": "Operario"}, {"rut": "11544016-0", "nombre": "Zamorano Narvaez Marcelino Alejandro", "cargo": "Asistente de Centro"}, {"rut": "13427797-1", "nombre": "Trujillo Ibieta Ignacio Andres", "cargo": "Jefe de Centro"}, {"rut": "17714706-0", "nombre": "Panicheo Gallegos Juan Ignacio", "cargo": "Operario"}, {"rut": "26493903-8", "nombre": "Sánchez Márquez Linda Kristal", "cargo": "Jefe de Logística"}, {"rut": "20233468-7", "nombre": "Mancilla Navarro Francisco Javier", "cargo": "Operario"}, {"rut": "8391887-k", "nombre": "Huenchur Levicoy José Alfonso", "cargo": "Operario"}, {"rut": "14089094-4", "nombre": "Sánchez Alvarado Oritia Isabel", "cargo": "Cocinero Pontón"}, {"rut": "12346240-8", "nombre": "Curill Mansilla Oscar Andrés", "cargo": "Operario"}, {"rut": "10253250-3", "nombre": "Levill Culun José Sentimio", "cargo": "Operario"}, {"rut": "16111990-3", "nombre": "Antillanca Barrientos Cristian Daniel", "cargo": "Asistente de Centro"}, {"rut": "16757212-k", "nombre": "Salgado Sáez Nicolas Enrique", "cargo": "Asistente de Centro"}, {"rut": "11432743-3", "nombre": "Runin Raicahuin Marina Del Carmen", "cargo": "Cocinero Pontón"}, {"rut": "15712572-9", "nombre": "Maldonado Maldonado Max Rodrigo", "cargo": "Operario"}, {"rut": "17826545-8", "nombre": "Yáñez Herrera José Miguel Ernesto", "cargo": "Cocinero Pontón"}, {"rut": "20511567-6", "nombre": "Legue Levill Daniel Alejandro", "cargo": "Operario"}, {"rut": "20967136-0", "nombre": "Vera Maldonado Victor Alejandro", "cargo": "Operario"}, {"rut": "17649543-k", "nombre": "Bahamonde Mayorga Fabian Tadeo", "cargo": "Asistente de Centro"}, {"rut": "12716192-5", "nombre": "Mancilla Millalonco José Rogers", "cargo": "Operario"}, {"rut": "20511356-8", "nombre": "Mancilla Velásquez Hector Nicolas", "cargo": "Operario"}, {"rut": "19675540-3", "nombre": "Navarro Navarro Guillermo Alfredo", "cargo": "Operario"}, {"rut": "20877820-k", "nombre": "Unquen Unquen Hector Ivan", "cargo": "Operario"}, {"rut": "15847563-4", "nombre": "Vyhmeister Andrade Gonzalo Enrique", "cargo": "Asistente de Centro"}, {"rut": "15795527-6", "nombre": "Nail Mansilla Juan Orlando", "cargo": "Operario"}, {"rut": "6618345-9", "nombre": "Estevez Pérez Loreto Esperanza", "cargo": "Cocinero Pontón"}, {"rut": "15947065-2", "nombre": "Nitor Guichapiren Marcos Antonio", "cargo": "Operario"}, {"rut": "19491495-4", "nombre": "Vera Vargas Esteban Nicolás", "cargo": "Operario"}, {"rut": "15303182-7", "nombre": "Iturra Triviño Juan Alexis", "cargo": "Asistente de Centro"}, {"rut": "18690227-0", "nombre": "Loaiza Alarcón Oscar Maximiliano", "cargo": "Operario"}, {"rut": "20588773-3", "nombre": "Barrientos Guichapani Maykol Alexis", "cargo": "Operario"}, {"rut": "18368404-3", "nombre": "Cuminao Carvajal Alejandro Fermin", "cargo": "Asistente de Centro"}, {"rut": "8570184-3", "nombre": "Varela Vega Tirso Amaury", "cargo": "Jefe de Centro"}, {"rut": "12853950-6", "nombre": "Donoso Venegas Marcelo Ignacio", "cargo": "Asistente de Centro"}, {"rut": "16894069-6", "nombre": "Sepúlveda Bahamonde Felipe Exequiel", "cargo": "Asistente de Centro"}, {"rut": "16405565-5", "nombre": "Cifuentes Bobadilla Ariel Enrique", "cargo": "Jefe de Mantención"}, {"rut": "8466931-8", "nombre": "Guala Gamin Alberto Julio", "cargo": "Operario"}, {"rut": "12237079-8", "nombre": "Campos Moraga Juan", "cargo": "Asistente de Centro"}, {"rut": "15903553-0", "nombre": "Soto Velásquez Jorge Eduardo", "cargo": "Jefe de Centro"}, {"rut": "12489907-9", "nombre": "Fuenzalida Campos Elizabeth Del Rosario", "cargo": "Cocinero Pontón"}, {"rut": "9743967-2", "nombre": "Torres Reyes Cesar Edgardo", "cargo": "Jefe de Centro"}, {"rut": "17282570-2", "nombre": "Jara Araya Nicole Margarita De Lourdes", "cargo": "Veterinario"}, {"rut": "12346059-6", "nombre": "Muñoz Barría Victor Ariel", "cargo": "Asistente de Logística"}, {"rut": "18902878-4", "nombre": "Ulloa Bustamante Christofer Giovanni", "cargo": "Operario"}, {"rut": "14435175-4", "nombre": "Mazzey Nuñez Alexander Anthony", "cargo": "Asistente de Centro"}, {"rut": "19247797-2", "nombre": "Morales Silva Rodolfo Ignacio", "cargo": "Veterinario"}, {"rut": "12991722-9", "nombre": "Lienlaf Lienlaf Sulema Ines", "cargo": "Cocinero"}, {"rut": "17888378-k", "nombre": "Delgado Soto Kenny Gianella", "cargo": "Analista Gestión de Operaciones y Logística"}, {"rut": "20917683-1", "nombre": "Chiguay Taruman Gustavo Angel", "cargo": "Operario"}, {"rut": "21525005-9", "nombre": "Guichapai Legue Jorge Ignacio", "cargo": "Operario"}, {"rut": "20877953-2", "nombre": "Loaiza Alarcón Julián Ignacio", "cargo": "Operario"}, {"rut": "15297780-8", "nombre": "López Fuentes Leonardo David", "cargo": "Operario"}, {"rut": "16479038-k", "nombre": "Morales Arrey Hermes Matias", "cargo": "Asistente Administrativo"}, {"rut": "21332457-8", "nombre": "Barria Villegas Juan Francisco", "cargo": "Operario"}, {"rut": "11310708-1", "nombre": "Cayun Muñoz Luis Antonio", "cargo": "Operario"}, {"rut": "17218468-5", "nombre": "Melipillán Villegas Felipe Jonatan", "cargo": "Operario"}, {"rut": "10012784-9", "nombre": "Cáceres Cáceres Patricio Mauro", "cargo": "Jefe de Operaciones Terrestres"}, {"rut": "18642514-6", "nombre": "Culipichun Nahuelhuen Estefani Nicole", "cargo": "Cocinero Pontón"}, {"rut": "16957956-3", "nombre": "Rodríguez Barría Claudio Esteban", "cargo": "Asistente de Centro"}, {"rut": "20571430-8", "nombre": "Yañez Hernandez Paola Alejandra", "cargo": "Cocinero Pontón"}, {"rut": "15926664-8", "nombre": "Oyarzún Miranda Mauricio Alejandro", "cargo": "Asistente de Centro"}, {"rut": "13119478-1", "nombre": "Martinez Netting Victor Enrique", "cargo": "Asistente de Centro"}, {"rut": "18384412-1", "nombre": "Barría Navarro Daniel Andrés", "cargo": "Operario"}, {"rut": "13169714-7", "nombre": "Haro Haro Ricardo Patricio", "cargo": "Asistente de Centro"}, {"rut": "19964384-3", "nombre": "Mira San Martín Diego Alonso", "cargo": "Asistente de Centro"}, {"rut": "17082838-0", "nombre": "Bevilacqua Rismondo Gianfranco", "cargo": "Asistente de Centro"}, {"rut": "18205023-7", "nombre": "Millapani Bahamonde Mauricio Alejandro", "cargo": "Operario"}, {"rut": "20524524-3", "nombre": "Durán Martínez Felipe Eduardo", "cargo": "Asistente de Centro"}, {"rut": "20154244-8", "nombre": "González Vera Alonso Andrés", "cargo": "Asistente de Centro"}, {"rut": "20049501-2", "nombre": "Cruces Cabeza Nicolás Ignacio", "cargo": "Asistente de Centro"}, {"rut": "19553486-1", "nombre": "Oyarzún Andrade René Felipe", "cargo": "Asistente de Logística"}, {"rut": "12027350-7", "nombre": "Naranjo Jofre Reynaldo David", "cargo": "Asistente de Centro"}, {"rut": "15284637-1", "nombre": "Almonacid Subiabre Cristian Alejandro", "cargo": "Operario"}, {"rut": "22094505-7", "nombre": "Uribe Gomez Rodrigo Esteban", "cargo": "Operario"}, {"rut": "21888108-4", "nombre": "Alvarado Legue Mauricio Esteban", "cargo": "Operario"}, {"rut": "13409649-7", "nombre": "Ruiz Barría Luis Honorino", "cargo": "Operario"}, {"rut": "14449072-k", "nombre": "Cárcamo Barrientos Ruben Alejandro", "cargo": "Operario"}, {"rut": "21969343-5", "nombre": "Ovalle Leiva Nicolas Eduardo Ignacio", "cargo": "Operario"}, {"rut": "23763494-2", "nombre": "Nisa Gil Eduardo", "cargo": "Cocinero Pontón"}, {"rut": "19085547-3", "nombre": "Marileo Elgueta Angela Soledad", "cargo": "Asistente de Redes"}, {"rut": "20624906-4", "nombre": "Barrientos Mardones Vicente Maximiliano", "cargo": "Ingeniero Trainee"}, {"rut": "20960305-5", "nombre": "Pérez Morales Eduardo Alexis", "cargo": "Ingeniero Trainee"}, {"rut": "12785375-4", "nombre": "Guerra Roldán Claudio Andrés", "cargo": "Cocinero Pontón"}, {"rut": "15874845-2", "nombre": "Torres Pérez Rolando Mauricio", "cargo": "Operario"}, {"rut": "20511449-1", "nombre": "Quinchipani Aguilar Ramón Nicolás", "cargo": "Operario"}, {"rut": "17382577-3", "nombre": "Millapán Uribe Nicole Jeannette", "cargo": "Cocinero Pontón"}, {"rut": "18.818.253-4", "nombre": "Escalona Miranda Marcos Antonio", "cargo": "Prevencionista de Riesgos"}, {"rut": "15757923-1", "nombre": "Paredes Barría Cristian Enrique", "cargo": "Experto Coordinador de Seguridad y Salud Ocupacional"}];
+/* Listas desplegables */
+const LISTA_CAPACITACIONES = [
+  "Estándar preventivo N°1 Ensilaje",
+  "Estándar preventivo N°2 Hidrolavadora",
+  "Estándar preventivo N°3 Carga de peces en Piscicultura",
+  "Estándar preventivo N°4 Manejo Manual de Carga",
+  "Estándar preventivo N°5 Brazo Hidráulico",
+  "Estándar preventivo N°6 Descarga de alimento",
+  "Estándar preventivo N°7 Uso de winche",
+  "Estándar preventivo N°8 Trabajo en tableros eléctricos",
+  "Estándar preventivo N°10 Atraque de embarcación",
+  "Estándar preventivo N°11 Uso de bote",
+  "Estándar preventivo N°12 Uso y Recarga de cilindros GLP",
+  "Estándar preventivo N°13 Trabajo en altura",
+  "Estándar preventivo N°14 Izaje y cargas suspendidas",
+  "Estándar preventivo N°15 Trabajo con sustancias peligrosas",
+  "Estándar preventivo N°16 Faena de baño de peces",
+  "Estándar preventivo N°17 Faenas de buceo",
+  "Estándar preventivo N°18 Uso winche eléctrico",
+  "Estándar preventivo N°19 Uso máscara Parat",
+  "Estándar preventivo N°20 Espacios confinados",
+  "Estándar preventivo N°21 Descarga de alimento centros de cultivo",
+  "Estándar preventivo N°22 Medidor de ácido sulfhídrico",
+  "Estándar preventivo N°23 Desplazamiento seguro por lugares de trabajo",
+  "Estándar preventivo N°24 Uso equipo Saver",
+  "Estándar preventivo N°25 Uso sistema de achique",
+  "Estándar preventivo N°26 Cambio de malla",
+  "Estándar preventivo N°27 Uso de transpaleta manual",
+  "Estándar preventivo N°28 Maniobra de cosecha en centros de cultivo",
+  "Estándar preventivo N°29 Uso y Máscara de rostro completo y filtros",
+  "Estándar preventivo N°30 Uso de balsa salvavidas",
+  "Estándar preventivo N°31 Uso de elementos de protección personal",
+  "Estándar preventivo N°32 Uso de traje de supervivencia",
+  "Estándar preventivo N°33 Limpieza de silos",
+  "Estándar preventivo N°34 Plan de contingencia atención y evacuación de lesionado",
+  "Estándar preventivo N°35 Uso seguro de elementos cortantes",
+  "Estándar preventivo N°36 Labores de cocina en centros de cultivo",
+  "Estándar preventivo N°37 Labores de necropsia en centros de cultivo",
+  "Estándar preventivo N°38 Cuidado de manos en centros de cultivo",
+  "Estándar preventivo N°39 Zafarrancho de incendio"
+];
 
-  // Indice por rut normalizado (sin puntos, minuscula, con guion) para busqueda rapida
-  const INDICE_EMPLEADOS = {};
-  EMPLEADOS.forEach(function(e) {
-    INDICE_EMPLEADOS[normalizarRut(e.rut)] = e;
+const LISTA_CENTROS = [
+  "Centro Auchac","Centro Chalihue","Centro Chulin","Centro Ester",
+  "Centro Mapue","Centro Nayahue","Centro Puqueldon","Centro Tepun",
+  "Centro Traiguen 1","Centro Traiguen 2","Centro Yatac","Centro Yelqui"
+];
+
+/* ---------- Utilidades ---------- */
+function normalizarRut(rut){
+  return (rut || "").toString().replace(/\./g,"").replace(/\s/g,"").toUpperCase().trim();
+}
+
+function llenarSelect(select, opciones){
+  select.innerHTML = '<option value="">Seleccione…</option>';
+  opciones.forEach(op=>{
+    const o = document.createElement("option");
+    o.value = op; o.textContent = op;
+    select.appendChild(o);
+  });
+}
+
+/* ---------- Inicialización ---------- */
+document.addEventListener("DOMContentLoaded", ()=>{
+  llenarSelect(document.getElementById("capacitacion"), LISTA_CAPACITACIONES);
+  llenarSelect(document.getElementById("centro"), LISTA_CENTROS);
+
+  // fecha por defecto: hoy
+  const hoy = new Date();
+  document.getElementById("fecha").value = hoy.toISOString().slice(0,10);
+
+  agregarParticipante(); // primer participante obligatorio
+
+  document.getElementById("rutRelator").addEventListener("blur", (e)=>{
+    buscarPersona(e.target.value, "estadoRelator", "nombreRelator", "cargoRelator");
   });
 
-  function normalizarRut(rut) {
-    return (rut || "").toString().toLowerCase().replace(/\./g, "").replace(/\s/g, "").trim();
+  document.getElementById("btnAgregarParticipante").addEventListener("click", agregarParticipante);
+
+  configurarFoto();
+
+  document.getElementById("formCapacitacion").addEventListener("submit", enviarFormulario);
+});
+
+/* ---------- Búsqueda de persona por RUT ---------- */
+async function buscarPersona(rut, idEstado, idNombre, idCargo){
+  const estadoEl = document.getElementById(idEstado);
+  const nombreEl = document.getElementById(idNombre);
+  const cargoEl  = document.getElementById(idCargo);
+  const rutNorm = normalizarRut(rut);
+
+  nombreEl.value = "";
+  cargoEl.value = "";
+
+  if(!rutNorm){
+    estadoEl.textContent = "";
+    estadoEl.className = "estado-busqueda";
+    return;
   }
 
-  function buscarEmpleado(rut) {
-    return INDICE_EMPLEADOS[normalizarRut(rut)] || null;
-  }
+  estadoEl.textContent = "Buscando…";
+  estadoEl.className = "estado-busqueda buscando";
 
-  // ================== AUTOCOMPLETADO RELATOR ==================
-  const rutRelatorInput = document.getElementById('rutRelator');
-  const nombreRelatorInput = document.getElementById('nombreRelator');
-  const cargoRelatorInput = document.getElementById('cargoRelator');
-  const hintRelator = document.getElementById('hintRelator');
-
-  rutRelatorInput.addEventListener('input', function() {
-    const emp = buscarEmpleado(this.value);
-    if (emp) {
-      nombreRelatorInput.value = emp.nombre;
-      cargoRelatorInput.value = emp.cargo;
-      hintRelator.textContent = "";
-      hintRelator.className = "hint";
+  try{
+    const resp = await fetch(`${URL_APPS_SCRIPT}?action=buscarRut&rut=${encodeURIComponent(rutNorm)}`);
+    const datos = await resp.json();
+    if(datos.encontrado){
+      nombreEl.value = datos.nombre;
+      cargoEl.value = datos.cargo;
+      estadoEl.textContent = "✓ Persona encontrada";
+      estadoEl.className = "estado-busqueda ok";
     } else {
-      nombreRelatorInput.value = "";
-      cargoRelatorInput.value = "";
-      hintRelator.textContent = this.value ? "RUT no encontrado en la base de datos" : "";
-      hintRelator.className = "hint error-text";
+      estadoEl.textContent = "RUT no encontrado en la base. Verifique o complete manualmente.";
+      estadoEl.className = "estado-busqueda error";
+      nombreEl.readOnly = false;
+      cargoEl.readOnly = false;
+    }
+  }catch(err){
+    estadoEl.textContent = "No se pudo conectar con la base de datos.";
+    estadoEl.className = "estado-busqueda error";
+  }
+}
+
+/* ---------- Participantes dinámicos ---------- */
+let contadorParticipantes = 0;
+
+function agregarParticipante(){
+  contadorParticipantes++;
+  const id = contadorParticipantes;
+  const div = document.createElement("div");
+  div.className = "participante";
+  div.dataset.id = id;
+  div.innerHTML = `
+    <span class="etiqueta-part">Participante ${id}</span>
+    ${id > 1 ? '<button type="button" class="btn-quitar">Quitar</button>' : ''}
+    <label class="req">RUT Participante</label>
+    <input type="text" class="rutParticipante" placeholder="12345678-9" required>
+    <div class="estado-busqueda"></div>
+    <div class="fila2">
+      <div>
+        <label>Nombre Participante</label>
+        <input type="text" class="nombreParticipante" readonly placeholder="Se completa automáticamente">
+      </div>
+      <div>
+        <label>Cargo Participante</label>
+        <input type="text" class="cargoParticipante" readonly placeholder="Se completa automáticamente">
+      </div>
+    </div>
+  `;
+  document.getElementById("listaParticipantes").appendChild(div);
+
+  const inputRut = div.querySelector(".rutParticipante");
+  const estadoDiv = div.querySelector(".estado-busqueda");
+  const nombreInput = div.querySelector(".nombreParticipante");
+  const cargoInput = div.querySelector(".cargoParticipante");
+
+  inputRut.addEventListener("blur", async ()=>{
+    const rutNorm = normalizarRut(inputRut.value);
+    nombreInput.value = "";
+    cargoInput.value = "";
+    if(!rutNorm){ estadoDiv.textContent=""; estadoDiv.className="estado-busqueda"; return; }
+    estadoDiv.textContent = "Buscando…";
+    estadoDiv.className = "estado-busqueda buscando";
+    try{
+      const resp = await fetch(`${URL_APPS_SCRIPT}?action=buscarRut&rut=${encodeURIComponent(rutNorm)}`);
+      const datos = await resp.json();
+      if(datos.encontrado){
+        nombreInput.value = datos.nombre;
+        cargoInput.value = datos.cargo;
+        estadoDiv.textContent = "✓ Persona encontrada";
+        estadoDiv.className = "estado-busqueda ok";
+      }else{
+        estadoDiv.textContent = "RUT no encontrado. Verifique o complete manualmente.";
+        estadoDiv.className = "estado-busqueda error";
+        nombreInput.readOnly = false;
+        cargoInput.readOnly = false;
+      }
+    }catch(e){
+      estadoDiv.textContent = "No se pudo conectar con la base de datos.";
+      estadoDiv.className = "estado-busqueda error";
     }
   });
 
-  // ================== PARTICIPANTES DINAMICOS ==================
-  const listaParticipantes = document.getElementById('listaParticipantes');
-  const botonAgregar = document.getElementById('agregarParticipante');
-  let contadorParticipantes = 0;
+  const btnQuitar = div.querySelector(".btn-quitar");
+  if(btnQuitar){
+    btnQuitar.addEventListener("click", ()=> div.remove());
+  }
+}
 
-  function agregarFilaParticipante() {
-    contadorParticipantes++;
-    const id = contadorParticipantes;
+/* ---------- Foto ---------- */
+let fotoBase64 = null;
+let fotoNombre = null;
 
-    const div = document.createElement('div');
-    div.className = 'participante';
-    div.dataset.id = id;
-    div.innerHTML =
-      '<button type="button" class="quitar">Quitar</button>' +
-      '<label>Rut Participante</label>' +
-      '<input type="text" class="rutParticipante" placeholder="12345678-9" required>' +
-      '<label>Nombre</label>' +
-      '<input type="text" class="nombreParticipante" readonly required>' +
-      '<label>Cargo</label>' +
-      '<input type="text" class="cargoParticipante" readonly required>' +
-      '<div class="hint hintParticipante"></div>';
+function configurarFoto(){
+  const zona = document.getElementById("zonaFoto");
+  const inputCamara = document.getElementById("inputCamara");
+  const inputFoto = document.getElementById("inputFoto");
+  const btnCamara = document.getElementById("btnCamara");
+  const btnGaleria = document.getElementById("btnGaleria");
+  const previa = document.getElementById("previaFoto");
+  const imgPrevia = document.getElementById("imgPrevia");
+  const btnQuitar = document.getElementById("btnQuitarFoto");
 
-    listaParticipantes.appendChild(div);
+  zona.addEventListener("click", ()=> inputFoto.click());
+  btnCamara.addEventListener("click", ()=> inputCamara.click());
+  btnGaleria.addEventListener("click", ()=> inputFoto.click());
 
-    const rutInput = div.querySelector('.rutParticipante');
-    const nombreInput = div.querySelector('.nombreParticipante');
-    const cargoInput = div.querySelector('.cargoParticipante');
-    const hint = div.querySelector('.hintParticipante');
-
-    rutInput.addEventListener('input', function() {
-      const emp = buscarEmpleado(this.value);
-      if (emp) {
-        nombreInput.value = emp.nombre;
-        cargoInput.value = emp.cargo;
-        hint.textContent = "";
-        hint.className = "hint hintParticipante";
-      } else {
-        nombreInput.value = "";
-        cargoInput.value = "";
-        hint.textContent = this.value ? "RUT no encontrado en la base de datos" : "";
-        hint.className = "hint hintParticipante error-text";
-      }
+  [inputCamara, inputFoto].forEach(inp=>{
+    inp.addEventListener("change", (e)=>{
+      const file = e.target.files[0];
+      if(!file) return;
+      fotoNombre = file.name || "evidencia.jpg";
+      const reader = new FileReader();
+      reader.onload = (ev)=>{
+        fotoBase64 = ev.target.result;
+        imgPrevia.src = fotoBase64;
+        previa.style.display = "block";
+        zona.style.display = "none";
+        document.querySelector(".botones-foto").style.display = "none";
+      };
+      reader.readAsDataURL(file);
     });
+  });
 
-    div.querySelector('.quitar').addEventListener('click', function() {
-      if (listaParticipantes.querySelectorAll('.participante').length <= 1) {
-        hint.textContent = "Debe haber al menos un participante registrado.";
-        hint.className = "hint hintParticipante error-text";
-        return;
-      }
-      div.remove();
-    });
+  btnQuitar.addEventListener("click", ()=>{
+    fotoBase64 = null;
+    fotoNombre = null;
+    inputCamara.value = "";
+    inputFoto.value = "";
+    previa.style.display = "none";
+    zona.style.display = "block";
+    document.querySelector(".botones-foto").style.display = "flex";
+  });
+}
+
+/* ---------- Envío del formulario ---------- */
+async function enviarFormulario(e){
+  e.preventDefault();
+
+  const btnEnviar = document.getElementById("btnEnviar");
+  const msgExito = document.getElementById("mensajeExito");
+  const msgError = document.getElementById("mensajeError");
+  msgExito.className = "mensaje exito";
+  msgError.className = "mensaje error";
+
+  // recolectar participantes
+  const nodos = document.querySelectorAll(".participante");
+  const participantes = [];
+  for(const nodo of nodos){
+    const rut = normalizarRut(nodo.querySelector(".rutParticipante").value);
+    const nombre = nodo.querySelector(".nombreParticipante").value.trim();
+    const cargo = nodo.querySelector(".cargoParticipante").value.trim();
+    if(!rut){
+      msgError.textContent = "Debe ingresar el RUT de todos los participantes.";
+      msgError.className = "mensaje error mostrar";
+      window.scrollTo(0,0);
+      return;
+    }
+    participantes.push({rut, nombre, cargo});
   }
 
-  botonAgregar.addEventListener('click', agregarFilaParticipante);
-  // Agrega un primer participante obligatorio por defecto
-  agregarFilaParticipante();
+  const datos = {
+    capacitacion: document.getElementById("capacitacion").value,
+    centro: document.getElementById("centro").value,
+    fecha: document.getElementById("fecha").value,
+    hora: document.getElementById("hora").value,
+    duracion: document.getElementById("duracion").value,
+    rutRelator: normalizarRut(document.getElementById("rutRelator").value),
+    nombreRelator: document.getElementById("nombreRelator").value.trim(),
+    cargoRelator: document.getElementById("cargoRelator").value.trim(),
+    participantes: participantes,
+    evidenciaBase64: fotoBase64,
+    evidenciaNombre: fotoNombre
+  };
 
-  // ================== ENVIO DEL FORMULARIO ==================
-  const form = document.getElementById('miFormulario');
-  const boton = document.getElementById('botonEnviar');
-  const status = document.getElementById('status');
+  if(!datos.capacitacion || !datos.centro || !datos.fecha || !datos.hora || !datos.duracion || !datos.rutRelator){
+    msgError.textContent = "Por favor complete todos los campos obligatorios.";
+    msgError.className = "mensaje error mostrar";
+    window.scrollTo(0,0);
+    return;
+  }
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
+  btnEnviar.disabled = true;
+  btnEnviar.textContent = "Enviando…";
+  msgError.className = "mensaje error";
 
-    // Validar campos generales obligatorios (por si el navegador no bloqueó el envío)
-    const camposObligatorios = [
-      { id: 'capacitacion', label: 'Nombre de la capacitación' },
-      { id: 'centro', label: 'Centro' },
-      { id: 'fecha', label: 'Fecha' },
-      { id: 'hora', label: 'Hora' },
-      { id: 'duracion', label: 'Duración' }
-    ];
-    for (const campo of camposObligatorios) {
-      if (!document.getElementById(campo.id).value) {
-        status.textContent = "El campo \"" + campo.label + "\" es obligatorio.";
-        status.className = "error";
-        return;
-      }
-    }
-
-    if (!rutRelatorInput.value.trim()) {
-      status.textContent = "El RUT del relator es obligatorio.";
-      status.className = "error";
-      return;
-    }
-
-    if (!nombreRelatorInput.value) {
-      status.textContent = "El RUT del relator no fue encontrado en la base de datos.";
-      status.className = "error";
-      return;
-    }
-
-    // Recolectar y validar participantes: TODOS los campos de cada fila son obligatorios
-    const filas = listaParticipantes.querySelectorAll('.participante');
-    const participantes = [];
-
-    if (filas.length === 0) {
-      status.textContent = "Debe registrar al menos un participante.";
-      status.className = "error";
-      return;
-    }
-
-    for (const div of filas) {
-      const rut = div.querySelector('.rutParticipante').value.trim();
-      const nombre = div.querySelector('.nombreParticipante').value.trim();
-      const cargo = div.querySelector('.cargoParticipante').value.trim();
-
-      if (!rut) {
-        status.textContent = "Debe ingresar el RUT de todos los participantes.";
-        status.className = "error";
-        return;
-      }
-      if (!nombre) {
-        status.textContent = "Hay un RUT de participante que no fue encontrado en la base de datos.";
-        status.className = "error";
-        return;
-      }
-      participantes.push({ rut: rut, nombre: nombre, cargo: cargo });
-    }
-
-    const datos = {
-      capacitacion: document.getElementById('capacitacion').value,
-      centro: document.getElementById('centro').value,
-      fecha: document.getElementById('fecha').value,
-      hora: document.getElementById('hora').value,
-      duracion: document.getElementById('duracion').value,
-      rutRelator: rutRelatorInput.value.trim(),
-      nombreRelator: nombreRelatorInput.value,
-      cargoRelator: cargoRelatorInput.value,
-      participantes: participantes,
-      marcaTiempo: new Date().toISOString()
-    };
-
-    boton.disabled = true;
-    boton.textContent = "Enviando...";
-    status.textContent = "";
-    status.className = "";
-
-    fetch(SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
+  try{
+    const resp = await fetch(URL_APPS_SCRIPT, {
+      method: "POST",
+      headers: {"Content-Type": "text/plain;charset=utf-8"}, // evita preflight CORS en Apps Script
       body: JSON.stringify(datos)
-    })
-    .then(function(res) { return res.json(); })
-    .then(function(data) {
-      if (data.result === "success") {
-        status.textContent = "Registro guardado correctamente (" + data.filas + " fila(s)).";
-        status.className = "success";
-        form.reset();
-        listaParticipantes.innerHTML = "";
-        contadorParticipantes = 0;
-        agregarFilaParticipante();
-      } else {
-        throw new Error(data.error || "Error desconocido");
-      }
-    })
-    .catch(function(err) {
-      status.textContent = "Hubo un error al enviar. Intenta de nuevo.";
-      status.className = "error";
-      console.error(err);
-    })
-    .finally(function() {
-      boton.disabled = false;
-      boton.textContent = "Registrar";
     });
-  });
-</script>
+    const resultado = await resp.json();
 
+    if(resultado.status === "success"){
+      msgExito.textContent = "✓ Registro enviado correctamente. Se guardó en la base de datos.";
+      msgExito.className = "mensaje exito mostrar";
+      window.scrollTo(0,0);
+      document.getElementById("formCapacitacion").reset();
+      document.getElementById("listaParticipantes").innerHTML = "";
+      contadorParticipantes = 0;
+      agregarParticipante();
+      document.getElementById("btnQuitarFoto").click();
+      document.getElementById("fecha").value = new Date().toISOString().slice(0,10);
+    } else {
+      throw new Error(resultado.message || "Error desconocido");
+    }
+  }catch(err){
+    msgError.textContent = "Ocurrió un error al enviar el registro: " + err.message;
+    msgError.className = "mensaje error mostrar";
+    window.scrollTo(0,0);
+  }finally{
+    btnEnviar.disabled = false;
+    btnEnviar.textContent = "Enviar registro";
+  }
+}
+
+</script>
 </body>
 </html>
